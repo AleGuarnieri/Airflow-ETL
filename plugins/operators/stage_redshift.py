@@ -42,7 +42,7 @@ class StageToRedshiftOperator(BaseOperator):
         credentials = aws.get_credentials()
         
         self.log.info("Clearing data from destination Redshift table")
-        redshift.run("DELETE FROM {}".format(self.redshift_sink_table))
+        #redshift.run("DELETE FROM {}".format(self.redshift_sink_table))
         
         self.log.info("Copying data from S3 to Redshift")
         rendered_key = self.s3_key.format(**context)
