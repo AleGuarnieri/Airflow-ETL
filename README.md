@@ -25,7 +25,7 @@ to correctly insert them in the analytical tables. The pipeline cosists of 6 dif
 
 Follow a screenshot of the pipiline from Airflow
 
-!(https://github.com/AleGuarnieri/Airflow-ETL/blob/main/Airflow_DAG.png)
+![Alt text](https://github.com/AleGuarnieri/Airflow-ETL/blob/main/Airflow_DAG.png)
 
 ## File Description 
 ```dags```: it contains the main function with the dags part of the pipeline
