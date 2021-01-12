@@ -95,7 +95,15 @@ load_time_dimension_table = LoadDimensionOperator(
 
 run_quality_checks = DataQualityOperator(
     task_id='Run_data_quality_checks',
-    dag=dag
+    dag=dag,
+    dq_checks=[
+        { 'check': 'SELECT COUNT(DISTINCT "level") FROM public.songplays', 'expected_result': 2 },
+        { 'check': 'SELECT COUNT(*) FROM public.artists WHERE name IS NULL', 'expected_result': 0 },
+        { 'check': 'SELECT COUNT(*) FROM public.songs WHERE artist_id IS NULL', 'expected_result': 0 },
+        { 'check': 'SELECT COUNT(*) FROM public.users WHERE last_name IS NULL', 'expected_result': 0 },
+        { 'check': 'SELECT COUNT(*) FROM public."time" WHERE week IS NULL', 'expected_result': 0 }
+    ],
+    redshift_conn_id="redshift_ag"
 )
 
 end_operator = DummyOperator(task_id='Stop_execution',  dag=dag)

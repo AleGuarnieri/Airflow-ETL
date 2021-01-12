@@ -4,7 +4,10 @@ from airflow.models import BaseOperator
 from airflow.utils.decorators import apply_defaults
 
 class StageToRedshiftOperator(BaseOperator):
-    
+"""
+Defines extraction class for staging tabels
+"""
+
     ui_color = '#358140'
     
     copy_sql = """
@@ -57,10 +60,4 @@ class StageToRedshiftOperator(BaseOperator):
             self.data_format
         )
         
-        #redshift.run(formatted_sql)
-        
-        
-
-
-
-
+        redshift.run(formatted_sql)

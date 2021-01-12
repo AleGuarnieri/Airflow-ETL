@@ -4,6 +4,9 @@ from airflow.utils.decorators import apply_defaults
 
 
 class LoadFactOperator(BaseOperator):
+"""
+Defines loading class for fact tabels
+"""
 
     ui_color = '#F98866'
 
@@ -20,7 +23,10 @@ class LoadFactOperator(BaseOperator):
         self.sql=sql
 
     def execute(self, context):
-        
+    """
+    Connection to redshift cluster is performed and then 
+    data are transformed and loaded into fact table
+    """
         redshift = PostgresHook(postgres_conn_id=self.redshift_conn_id)
 
         self.log.info("Transforming and loading data from staging tables to fact table")
