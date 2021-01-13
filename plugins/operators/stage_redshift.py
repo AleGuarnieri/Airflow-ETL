@@ -4,9 +4,9 @@ from airflow.models import BaseOperator
 from airflow.utils.decorators import apply_defaults
 
 class StageToRedshiftOperator(BaseOperator):
-"""
-Defines extraction class for staging tabels
-"""
+    """
+    Defines extraction class for staging tabels
+    """
 
     ui_color = '#358140'
     
@@ -40,12 +40,16 @@ Defines extraction class for staging tabels
         self.data_format = data_format
         
     def execute(self, context):
+        """
+        Connection to redshift is created and it is 
+        """
+        
         redshift = PostgresHook(postgres_conn_id=self.redshift_conn_id)
         aws = AwsHook(self.aws_credentials_id)
         credentials = aws.get_credentials()
         
         self.log.info("Clearing data from destination Redshift table")
-        #redshift.run("DELETE FROM {}".format(self.redshift_sink_table))
+        redshift.run("DELETE FROM {}".format(self.redshift_sink_table))
         
         self.log.info("Copying data from S3 to Redshift")
         rendered_key = self.s3_key.format(**context)

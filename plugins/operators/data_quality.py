@@ -3,9 +3,9 @@ from airflow.models import BaseOperator
 from airflow.utils.decorators import apply_defaults
 
 class DataQualityOperator(BaseOperator):
-"""
-Defines data quality checks class
-"""
+    """
+    Defines data quality checks class
+    """
 
     ui_color = '#89DA59'
 
@@ -20,12 +20,13 @@ Defines data quality checks class
         self.redshift_conn_id = redshift_conn_id
 
     def execute(self, context):
-    """
-    Performs data quality check queries defined in the main dag.
-    Each query is executed and the number of retrieved records
-    is compared with the expected one: if there is no match,
-    the pipeline fails.
-    """
+        """
+        Performs data quality check queries defined in the main dag.
+        Each query is executed and the number of retrieved records
+        is compared with the expected one: if there is no match,
+        the pipeline fails.
+        """
+        
         redshift = PostgresHook(postgres_conn_id=self.redshift_conn_id)
         records = ""
         error_count = 0

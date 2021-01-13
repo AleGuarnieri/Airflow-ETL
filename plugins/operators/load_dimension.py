@@ -3,9 +3,9 @@ from airflow.models import BaseOperator
 from airflow.utils.decorators import apply_defaults
 
 class LoadDimensionOperator(BaseOperator):
-"""
-Defines loading class for dimension tabels
-"""
+    """
+    Defines loading class for dimension tabels
+    """
 
     ui_color = '#80BD9E'
 
@@ -24,12 +24,12 @@ Defines loading class for dimension tabels
         self.truncate=truncate
 
     def execute(self, context):
-    """
-    Connection to redshift cluster is performed and then 
-    data are transformed and loaded into dimension tables
-    Parameter "truncate" allows control over truncating
-    dimension table before loading
-    """
+        """
+        Connection to redshift cluster is performed and then 
+        data are transformed and loaded into dimension tables
+        Parameter "truncate" allows control over truncating
+        dimension table before loading
+        """
     
         redshift = PostgresHook(postgres_conn_id=self.redshift_conn_id)
         
